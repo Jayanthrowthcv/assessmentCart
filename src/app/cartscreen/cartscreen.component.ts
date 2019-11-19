@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { ShoppingService } from "../shoppinglist/shoppinglist.service";
 import { Subscription } from "rxjs";
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "my-cartscreen",
@@ -23,13 +23,35 @@ export class CartscreenComponent {
   ngOnInit() {
     this.hideCart = true;
     this.shopItems = this.ShoppingService.addedList;
-    this.shopItems.forEach(x=>{
-      this.totalCost += x.Item.price;
-      this.totalDiscount += x.Item.price*(x.Item.discount/100);
-    })
+    this.calTotalDis();
   }
-  goHome(){
-    this.router.navigate(['/Home']);
-    
+  goHome() {
+    this.router.navigate(["/Home"]);
+  }
+  increment(item) {
+    this.shopItems.forEach(x => {
+      if (x.Item.id === item.Item.id) {
+        x.count++;
+      }
+    });
+    this.calTotalDis();
+  }
+  decrement(item) {
+    if (item.count > 1) {
+      this.shopItems.forEach(x => {
+        if (x.Item.id === item.Item.id) {
+          x.count--;
+        }
+      });
+    }
+    this.calTotalDis();
+  }
+  calTotalDis() {
+    this.totalCost = 0;
+    this.totalDiscount = 0;
+    this.shopItems.forEach(x => {
+      this.totalCost += x.Item.price * x.count;
+      this.totalDiscount += x.Item.price * (x.Item.discount / 100) * x.count;
+    });
   }
 }
