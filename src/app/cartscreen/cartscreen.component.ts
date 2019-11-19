@@ -32,10 +32,4 @@ export class CartscreenComponent {
     this.router.navigate(['/Home']);
     
   }
-  increment(){
-
-  }
-  decrement(){
-
-  }
 }
