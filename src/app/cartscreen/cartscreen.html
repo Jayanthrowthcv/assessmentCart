@@ -13,9 +13,9 @@
 					<span>&#8377;</span>{{item.Item.price - (item.Item.price*item.Item.discount/100)}}<span style="margin-left:10px;font-size:12px;text-decoration: line-through;"><span>&#8377;</span>{{item.Item.price}}</span><span style="margin-left:10px;font-size:12px;color:green"><b>{{item.Item.discount}}% off</b></span>
 					<span>
           <span class="btnDiv">
-          <button class="addRem" (click)="increment(item)">-</button>
+          <button class="addRem">-</button>
           <input class="countDiv" type="text" value="{{item.count}}"/>
-           <button class="addRem" (click)="decrement(item)">+</button>
+           <button class="addRem">+</button>
           </span>
 					</span>
 				</div>
